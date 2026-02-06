@@ -1,0 +1,98 @@
+﻿* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f2ee, #ece6df);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reset-wrapper {
+    width: 100%;
+    padding: 20px;
+}
+
+.reset-card {
+    max-width: 420px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    text-align: center;
+}
+
+    .reset-card h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+        color: #3a3a3a;
+    }
+
+.subtitle {
+    font-size: 14px;
+    color: #777;
+    margin: 12px 0 28px;
+}
+
+.reset-card input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+}
+
+    .reset-card input:focus {
+        outline: none;
+        border-color: #c2a875;
+    }
+
+.reset-card button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #c2a875, #a88b5c);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+    .reset-card button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    }
+
+.mensaje {
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+    .mensaje.error {
+        color: #c0392b;
+    }
+
+    .mensaje.success {
+        color: #2ecc71;
+    }
+
+.volver {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 13px;
+    color: #a88b5c;
+    text-decoration: none;
+}
+
+    .volver:hover {
+        text-decoration: underline;
+    }

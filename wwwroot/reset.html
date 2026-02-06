@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Restablecer contraseña | Diamond Accesorios</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="reset.css">
+</head>
+<body>
+
+    <div class="reset-wrapper">
+        <div class="reset-card">
+            <h1>Restablecer contraseña</h1>
+            <p class="subtitle">
+                Ingresá tu nueva contraseña para acceder nuevamente a tu cuenta
+            </p>
+
+            <input type="password" id="password1" placeholder="Nueva contraseña">
+            <input type="password" id="password2" placeholder="Repetir contraseña">
+
+            <button id="btnReset">Cambiar contraseña</button>
+
+            <p id="mensaje" class="mensaje"></p>
+
+            <a href="/" class="volver">← Volver a Diamond Accesorios</a>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get("token");
+
+        const mensaje = document.getElementById("mensaje");
+
+        document.getElementById("btnReset").addEventListener("click", async () => {
+            const p1 = document.getElementById("password1").value;
+            const p2 = document.getElementById("password2").value;
+
+            mensaje.textContent = "";
+            mensaje.className = "mensaje";
+
+            if (!token) {
+                mensaje.textContent = "Enlace inválido.";
+                mensaje.classList.add("error");
+                return;
+            }
+
+            if (!p1 || p1.length < 5) {
+                mensaje.textContent = "La contraseña debe tener al menos 5 caracteres.";
+                mensaje.classList.add("error");
+                return;
+            }
+
+            if (p1 !== p2) {
+                mensaje.textContent = "Las contraseñas no coinciden.";
+                mensaje.classList.add("error");
+                return;
+            }
+
+            try {
+                const res = await fetch("/api/usuarios/reset-password", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        token: token,
+                        nuevaContrasena: p1
+                    })
+                });
+
+                if (!res.ok) {
+                    mensaje.textContent = "El enlace es inválido o ya expiró.";
+                    mensaje.classList.add("error");
+                    return;
+                }
+
+                mensaje.textContent = "Contraseña actualizada correctamente.";
+                mensaje.classList.add("success");
+
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 2500);
+
+            } catch (err) {
+                mensaje.textContent = "Error de conexión. Intentá nuevamente.";
+                mensaje.classList.add("error");
+            }
+        });
+    </script>
+
+</body>
+</html>
